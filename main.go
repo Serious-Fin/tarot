@@ -5,6 +5,20 @@ import (
 	"math/rand/v2"
 
 	"github.com/blacktop/go-termimg"
+	"github.com/charmbracelet/lipgloss"
+)
+
+var (
+	titleStyle = lipgloss.NewStyle().
+			Bold(true).
+			Foreground(lipgloss.Color("63")).
+			MarginLeft(2)
+
+	descStyle = lipgloss.NewStyle().
+			Italic(true).
+			Faint(true).
+			Padding(1, 0, 1, 2).
+			Width(50)
 )
 
 type Card struct {
@@ -147,24 +161,37 @@ var cards = []Card{
 }
 
 func main() {
-	fmt.Println("Hello, World!")
-
 	card := cards[rand.IntN(len(cards))]
-	fmt.Println(card.name)
-	fmt.Println(card.description)
 
-	// Open the tarot image
+	// 1. Styles
+	titleStyle := lipgloss.NewStyle().
+		Bold(true).
+		Foreground(lipgloss.Color("63")).
+		MarginBottom(1) // Added padding after title
+
+	descStyle := lipgloss.NewStyle().
+		Foreground(lipgloss.Color("255")). // Set to White
+		Italic(true).
+		PaddingTop(1)
+
+	// 2. Display Name
+	fmt.Println(titleStyle.Render(card.name))
+
+	// 3. Display Image (Original Dimensions)
 	img, err := termimg.Open(card.image)
 	if err != nil {
 		panic(err)
 	}
 
-	// Auto-detect protocol and print
-	// It will use Kitty/iTerm2 if available, or Sixel/Halfblocks as fallback
 	height := 30
 	width := int(float64(height) * 1.2)
+
 	err = img.Width(width).Height(height).Print()
 	if err != nil {
 		fmt.Println("Could not display image:", err)
 	}
+
+	// 4. Display Description
+	// We wrap the description to match the image width for a "nice" look
+	fmt.Println(descStyle.Width(width).Render(card.description))
 }
