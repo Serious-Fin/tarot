@@ -3,140 +3,141 @@ package main
 import (
 	"fmt"
 	"math/rand/v2"
+
 	"github.com/blacktop/go-termimg"
 )
 
 type Card struct {
-	name string
+	name        string
 	description string
 }
 
 var cards = []Card{
 	{
-		name: "The Fool",
+		name:        "The Fool",
 		description: "The Fool is everyone - including you and me. Each step he takes on his journey feels like stepping into a brave new world. Ultimately, the journey will change him. But as the card shows, he's a trustworthy lad whose tireless hope drives him toward his goal.",
 	},
 	{
-		name: "The Magician",
+		name:        "The Magician",
 		description: "The Magician is the card of self-confidence and adapting to situations through intellect and sheer will. The Magician is a schemer who always has one last trick up his sleeve, who despite everything manages to stay afloat and remain in control of his own destiny.",
 	},
 	{
-		name: "The High Priestess",
+		name:        "The High Priestess",
 		description: "The High Priestess is a card of mystery. It shows how all our secrets hang by a delicate thread and the struggle between common sense and intuition. The High Priestess symbolizes the cold, calm waters as well as the mysteries hidden in their depths.",
 	},
 	{
-		name: "The Empress",
+		name:        "The Empress",
 		description: "The empress is a card of femininity and motherhood. She is authoritative, knows what she wants, and exhibits refinement and sensuousness. The Empress symbolizes creativity and growth, and instructs us not to dismiss our unconscious impulses, but to trust our intuition.",
 	},
 	{
-		name: "The Emperor",
+		name:        "The Emperor",
 		description: "The Emperor represents patriarchal control and is pleased with the authority and power he possesses to shape the future. The Emperor makes the rules and enforces them for the common good. But prestige has its dark sides – the Emperor is dominating and ruthless and will climb over a mountain of bodies to achieve his aim.",
 	},
 	{
-		name: "The Hierophant",
+		name:        "The Hierophant",
 		description: "The Hierophant symbolizes a respect for tradition. It represents one who tries to maintain the established order, even though their very character is shaped by it. The Hierophant places his faith in institutions – for the alternative is pure chaos. Only by placing his faith in order can he draw strength.",
 	},
 	{
-		name: "The Lovers",
+		name:        "The Lovers",
 		description: "The Lovers is the card of dichotomies. It points to the contradictions that clash within each of us and of the challenge of striking a balance between extremes. The Lovers is also the card of dilemmas, like The Fool who stands at the crossroads, unable to make his choice.",
 	},
 	{
-		name: "The Chariot",
+		name:        "The Chariot",
 		description: "The Chariot is always charging ahead despite being pulled by its steeds in opposite directions. The rider who steers it constantly reins in the light and dark sides of the soul with the help of Reason. To ride in The Chariot is to experience highs and lows – ups and downs.",
 	},
 	{
-		name: "Strength",
+		name:        "Strength",
 		description: "Strength is the card of resilience. It is associated with determination, bravery and internal struggle. One must have dedication in order to overcome obstacles and reach one's goal. Strength is about physical prowess and spiritual fortitude – the power that must be unleashed to achieve the impossible.",
 	},
 	{
-		name: "The Hermit",
+		name:        "The Hermit",
 		description: "The Hermit is a card of self-imposed isolation. It represents an escape from the hustle and bustle of the city, a turning away from constant newness toward Ye Olde ways. For the hermit, solitude is the road to the sublime – a road that is taken not with great bounds and strides, but with small, concentrated steps.",
 	},
 	{
-		name: "Wheel of Fortune",
+		name:        "Wheel of Fortune",
 		description: "The Wheel of Fortune means that change is coming. One's destiny could turn out for the better or the worse, yet it also bears the promise of new possibilities. The Wheel reminds us that nobody remains at the top forever, but also that not every situation is hopeless.",
 	},
 	{
-		name: "Justice",
+		name:        "Justice",
 		description: "Justice is the card of conflict resolution. It proclaims the need for order, to see through lies and deceit, and a return to the natural state of affairs. Justice implies a just sentence, but also due process.",
 	},
 	{
-		name: "The Hanged Man",
+		name:        "The Hanged Man",
 		description: "The Hanged Man is the card of sacrifice. It says that a price must be paid in order to achieve enlightenment. The Hanged Man's forsakenness opens the path for rebirth into a new life, though this path is wrought with pain suspended in time and ultimately ends in death.",
 	},
 	{
-		name: "Death",
+		name:        "Death",
 		description: "Death is the card of becoming. It signifies an imminent and difficult transition – the conclusion of one phase of life and the beginning of another. Inevitably, something gets lost during the transformation, but something else will rise and take its place.",
 	},
 	{
-		name: "Temperance",
+		name:        "Temperance",
 		description: "Temperance is the card of balance. It may symbolize self-restraint or the gradual shift toward a more mature state of equilibrium. Temperance is associated with being in control of oneself as well as the desire to achieve inner peace.",
 	},
 	{
-		name: "The Devil",
+		name:        "The Devil",
 		description: "The Devil is addiction, craving and passion. He brings fame and fortune, but at the price of losing oneself to a world of material distractions. The Devil lures unsuspecting souls into traps, but always grants them a choice. One can try their luck and take him up on his offer, but one should always know when to call quits.",
 	},
 	{
-		name: "The Tower",
+		name:        "The Tower",
 		description: "The Tower is an omen of radical change, chaos and destruction. The lightning striking The Tower signifies a return to the old order that lies buried under the ruins, and a new order that will rise from it. It is a symbol of tragedy, apocalypse, and self-destruction.",
 	},
 	{
-		name: "The Star",
+		name:        "The Star",
 		description: "The Star is the card of hope. In the darkest of nights there is a light that shines the path to home. The Star is inspiration, motivation and gives us strength to move forward.",
 	},
 	{
-		name: "The Moon",
+		name:        "The Moon",
 		description: "The Moon reminds us that reality is not always what it seems at first glance. In a world of appearances and illusions, the best course is often charted by one's own intuition. The Moon is also the card of dreams, desires, and of course, sleep – Death's nightly ritual.",
 	},
 	{
-		name: "The Sun",
+		name:        "The Sun",
 		description: "The Sun symbolizes success. It is a card of freedom, renewal and a bright future that lies ahead. The Sun also represents truth, for its light will always pull back the curtain of shadow that hides the world's secrets. It is[sic✍️] also represents greatness and splendor.",
 	},
 	{
-		name: "Judgement",
+		name:        "Judgement",
 		description: "Judgement is the card of renewal. The angel blowing into the horn heralds resurrection and liberation. This card foretells an important change that will result in healing or fulfillment. It is also a symbol of self-worth.",
 	},
 	{
-		name: "The World",
+		name:        "The World",
 		description: "The World lies at the end of The Fool's long and winding journey. Wiser and more world-weary than he started out, the Fool faces a moment of reckoning. Some of us accept where our journey has led us to, while others embark on a new challenge. One thing in this World is certain – you can't have it all.",
 	},
 	{
-		name: "King of Cups",
+		name:        "King of Cups",
 		description: "A King of Cups is a creative and emotionally-driven person. They are strong individuals, who realize the importance of feelings. Intuition helps them navigate their lives. When fate is in their favor, compassion guides their actions. When they're at odds with fate, it'd be unwise to trust them.",
 	},
 	{
-		name: "King of Pentacles",
+		name:        "King of Pentacles",
 		description: "The King of Pentacles is imperious. They represent entreprise, pragmatism, but also attachement. From such a person one can expect coldness or attachment to material possessions; they are likely to turn your world upside down sooner or later.",
 	},
 	{
-		name: "King of Wands",
+		name:        "King of Wands",
 		description: "The master of planning and unorthodox ideas. An individual who brings people together and radiates inspiration to those they consider friends. However, their enemies will soon find they are an impulsive, devastating force of nature, capable of breaking oaths and crossing any line, just to see their goals achieved.",
 	},
 	{
-		name: "King of Swords",
+		name:        "King of Swords",
 		description: "Two things matter above all else for a King of Swords: logic and conviction. They represent a person with a precise moral compass, who is known for their caring demeanor. However, enemies beware - the King of Swords is a ruthless opponent, who will not rest until you are punished and left to be torn apart by hounds of fate.",
 	},
 }
 
 func main() {
-    fmt.Println("Hello, World!")
+	fmt.Println("Hello, World!")
 
-	card := cards[rand.IntN(len(cards))];
-	fmt.Println(card.name);
-	fmt.Println(card.description);
+	card := cards[rand.IntN(len(cards))]
+	fmt.Println(card.name)
+	fmt.Println(card.description)
 
 	// Open the tarot image
-    img, err := termimg.Open("images/the-hermit.jpeg")
-    if err != nil {
-        panic(err)
-    }
+	img, err := termimg.Open("images/the-hermit.jpeg")
+	if err != nil {
+		panic(err)
+	}
 
-    // Auto-detect protocol and print
-    // It will use Kitty/iTerm2 if available, or Sixel/Halfblocks as fallback
+	// Auto-detect protocol and print
+	// It will use Kitty/iTerm2 if available, or Sixel/Halfblocks as fallback
 	height := 30
 	width := int(float64(height) * 1.2)
-    err = img.Width(width).Height(height).Print()
-    if err != nil {
-        fmt.Println("Could not display image:", err)
-    }
+	err = img.Width(width).Height(height).Print()
+	if err != nil {
+		fmt.Println("Could not display image:", err)
+	}
 }
