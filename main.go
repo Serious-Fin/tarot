@@ -12,6 +12,7 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
+//go:embed images/*.jpeg
 var imageFS embed.FS
 
 var (
